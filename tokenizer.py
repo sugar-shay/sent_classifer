@@ -8,7 +8,7 @@ class SentTokenizer():
     def __init__(self, model_checkpoint, max_length):
         
         self.tokenizer = AutoTokenizer.from_pretrained(model_checkpoint, use_fast=True)
-        self.mex_len = max_length
+        self.max_len = max_length
         
     def encode_data(self, data):
         
@@ -27,7 +27,7 @@ class Sentiment_Dataset(torch.utils.data.Dataset):
     def __getitem__(self, idx):
         item = {key: torch.LongTensor(val[idx]) for key, val in self.encodings.items()}
         if self.ground_truths is not None:
-            item['label'] = torch.as_tensor(self.ground_truth[idx])
+            item['label'] = torch.as_tensor(self.ground_truths[idx])
         return item
     
     def __len__(self):

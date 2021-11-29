@@ -96,10 +96,13 @@ class Lit_SequenceClassification(pl.LightningModule):
 # Training function to train the model
 # ---we use early stopping and monitor the validation loss
 # =============================================================================
-def train_LitModel(model, train_data, val_data, epochs, batch_size, patience = 3):
-    train_dataloader = DataLoader(train_data, batch_size = batch_size, shuffle=True)
-    val_dataloader = DataLoader(val_data, batch_size=32, shuffle = False)
-    trainer = pl.Trainer(gpus=1, max_epochs = epochs, callbacks= [EarlyStopping('val_loss', patience=patience, mode='min')])
+def train_LitModel(model, train_dataset, val_dataset, epochs, batch_size, patience = 3, num_gpu=1):
+    train_dataloader = DataLoader(train_dataset, batch_size = batch_size, shuffle=True)
+    val_dataloader = DataLoader(val_dataset, batch_size=32, shuffle = False)
+    
+    early_stop_callback = EarlyStopping(monitor="val_loss", patience=patience, verbose=False, mode="min")
+
+    trainer = pl.Trainer(gpus=num_gpu, max_epochs = epochs, callbacks= [early_stop_callback])
     trainer.fit(model, train_dataloader, val_dataloader)
     
     return model
