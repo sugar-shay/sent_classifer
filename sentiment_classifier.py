@@ -89,7 +89,7 @@ class Lit_SequenceClassification(pl.LightningModule):
             
         self.training_stats['val_losses'].append(avg_loss_cpu)
         print('Val Loss: ', avg_loss_cpu)
-        self.log('val_loss', avg_loss_cpu)
+        self.log('val_loss', avg_loss)
         
    
 # =============================================================================
