@@ -50,11 +50,11 @@ class Lit_SequenceClassification(pl.LightningModule):
     def forward(self, input_ids, attention_mask):
         
         outputs = self.encoder(input_ids=input_ids, attention_mask=attention_mask, return_dict=True)
-        logits = self.softmax(outputs.logits)
+        #logits = self.softmax(outputs.logits)
         
         
         #we return the outputs so that we can also evaluate the model using classification metrics if we so wish
-        return logits
+        return outputs.logits
     
     def configure_optimizers(self):
         optimizer = AdamW(self.parameters(), lr=3e-5)
@@ -63,8 +63,8 @@ class Lit_SequenceClassification(pl.LightningModule):
     def training_step(self, batch, batch_idx):
         
         logits = self.forward(input_ids= batch['input_ids'], attention_mask=batch['attention_mask'])
-        loss = self.criterion(logits, batch['label'])
-
+        #loss = self.criterion(logits, batch['label'])
+        loss = torch.nn.functional.softmax(logits, batch['label'])
         return {'loss':loss, 'train_loss':loss}
     
     def training_epoch_end(self, losses):
