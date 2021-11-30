@@ -54,7 +54,7 @@ def main():
     print('Untrained model CR: ', cr)
     
     
-    model = train_LitModel(model, train_dataset, val_dataset, epochs=15, batch_size=16, patience = 3, num_gpu=1)
+    model = train_LitModel(model, train_dataset, val_dataset, epochs=15, batch_size=8, patience = 3, num_gpu=1)
     
     '''
     #saving the training stats
