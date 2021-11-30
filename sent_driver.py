@@ -26,9 +26,9 @@ def main():
     #label 2 correspnds to positive sentiment 
     #label 1 is neutral 
     #label 0 is negative 
-    train_data = load_dataset(finetune_dataset, 'sentences_50agree', split='train[:70%]')
-    val_data = load_dataset(finetune_dataset, 'sentences_50agree', split='train[70%:85%]')
-    test_data = load_dataset(finetune_dataset, 'sentences_50agree', split='train[85%:]')
+    train_data = load_dataset(finetune_dataset, 'sentences_75agree', split='train[:70%]')
+    val_data = load_dataset(finetune_dataset, 'sentences_75agree', split='train[70%:85%]')
+    test_data = load_dataset(finetune_dataset, 'sentences_75agree', split='train[85%:]')
     
     
     #need to find the average length of the sequences
