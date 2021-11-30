@@ -47,6 +47,12 @@ def main():
 
     model = Lit_SequenceClassification(model_checkpoint)
     
+    preds, ground_truths = model_testing(model, test_dataset)
+    
+    cr = classification_report(y_true=ground_truths, y_pred = preds, output_dict = False)
+    
+    print('Untrained model CR: ', cr)
+    
     
     model = train_LitModel(model, train_dataset, val_dataset, epochs=15, batch_size=16, patience = 3, num_gpu=1)
     
@@ -65,7 +71,7 @@ def main():
     cr = classification_report(y_true=ground_truths, y_pred = preds, output_dict = False)
     
     print()
-    print(cr)
+    print('Trained model CR: ', cr)
 
 
 if __name__ == "__main__":
