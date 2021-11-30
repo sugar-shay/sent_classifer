@@ -64,7 +64,7 @@ class Lit_SequenceClassification(pl.LightningModule):
         
         logits = self.forward(input_ids= batch['input_ids'], attention_mask=batch['attention_mask'])
         #loss = self.criterion(logits, batch['label'])
-        loss = torch.nn.functional.softmax(logits, batch['label'])
+        loss = torch.nn.functional.cross_entropy(logits, batch['label'])
         return {'loss':loss, 'train_loss':loss}
     
     def training_epoch_end(self, losses):
