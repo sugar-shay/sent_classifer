@@ -57,7 +57,7 @@ class Lit_SequenceClassification(pl.LightningModule):
         return outputs.logits
     
     def configure_optimizers(self):
-        optimizer = AdamW(self.parameters(), lr=1e-5)
+        optimizer = AdamW(self.parameters(), lr=5e-6)
         return optimizer
     
     def training_step(self, batch, batch_idx):

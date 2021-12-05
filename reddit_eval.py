@@ -38,7 +38,7 @@ reddit_data['label'] = reddit_data['label'].astype(int)
 
 reddit_data = reddit_data.sample(frac=1)
 
-train_data, val_data = reddit_data.iloc[:250, :], reddit_data.iloc[250:, :]
+train_data, val_data = reddit_data.iloc[:350, :], reddit_data.iloc[350:, :]
 
 
 
