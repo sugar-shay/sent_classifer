@@ -60,7 +60,7 @@ test_dataset = tokenizer.encode_data(reddit_test_data)
 
 model = Lit_SequenceClassification(model_checkpoint)
 
-preds, ground_truths = model_testing(model, val_dataset)
+preds, ground_truths = model_testing(model, test_dataset)
 
 cr = classification_report(y_true=ground_truths, y_pred = preds, output_dict = False)
 
