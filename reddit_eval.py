@@ -38,14 +38,14 @@ reddit_train_data.columns, reddit_test_data.columns = ['sentence', 'label'], ['s
 reddit_train_data['sentence'], reddit_test_data['sentence'] = reddit_train_data['sentence'].astype(str), reddit_test_data['sentence'].astype(str)
 reddit_train_data['label'], reddit_test_data['label'] = reddit_train_data['label'].astype(int), reddit_test_data['label'].astype(int)
 
-reddit_data = reddit_data.sample(frac=1)
+reddit_train_data = reddit_train_data.sample(frac=1)
 
-train_data, val_data = reddit_data.iloc[:400, :], reddit_data.iloc[400:, :]
+train_data, val_data = reddit_train_data.iloc[:400, :], reddit_train_data.iloc[400:, :]
 
 
 
 #need to find the average length of the sequences
-total_avg = sum( map(len, list(train_data['sentence'])) ) / len(val_data['sentence'])
+total_avg = sum( map(len, list(train_data['sentence'])) ) / len(train_data['sentence'])
 print('Avg. sentence length: ', total_avg)
 
 
