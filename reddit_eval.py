@@ -22,7 +22,9 @@ from sentiment_classifier import *
 #model_checkpoint = 'bert-base-uncased'
 #model_checkpoint = "mrm8488/distilroberta-finetuned-financial-news-sentiment-analysis"
 model_checkpoint = "facebook/muppet-roberta-large"
-testing_dataset = 'Reddit_Data.csv'
+training_dataset = 'Reddit_Data.csv'
+testing_dataset = 'Reddit_Data_Test.csv'
+
 
 #label 2 correspnds to positive sentiment 
 #label 1 is neutral 
@@ -30,11 +32,11 @@ testing_dataset = 'Reddit_Data.csv'
 
 #train_data = load_dataset(finetune_dataset, 'sentences_75agree', split='train[:70%]')
 #val_data = load_dataset(finetune_dataset, 'sentences_75agree', split='train[70%:85%]')
-reddit_data = pd.read_csv(testing_dataset)
-reddit_data.columns = ['sentence', 'label']
+reddit_train_data, reddit_test_data = pd.read_csv(training_dataset), pd.read_csv(testing_dataset)
+reddit_train_data.columns, reddit_test_data.columns = ['sentence', 'label'], ['sentence', 'label'] 
 
-reddit_data['sentence'] = reddit_data['sentence'].astype(str)
-reddit_data['label'] = reddit_data['label'].astype(int)
+reddit_train_data['sentence'], reddit_test_data['sentence'] = reddit_train_data['sentence'].astype(str), reddit_test_data['sentence'].astype(str)
+reddit_train_data['label'], reddit_test_data['label'] = reddit_train_data['label'].astype(int), reddit_test_data['label'].astype(int)
 
 reddit_data = reddit_data.sample(frac=1)
 
@@ -53,7 +55,7 @@ tokenizer = SentTokenizer(model_checkpoint, max_length, reddit_eval=True)
 
 train_dataset = tokenizer.encode_data(train_data)
 val_dataset = tokenizer.encode_data(val_data)
-#test_dataset = tokenizer.encode_data(test_data)
+test_dataset = tokenizer.encode_data(reddit_test_data)
 
 
 model = Lit_SequenceClassification(model_checkpoint)
@@ -69,7 +71,7 @@ print(cr)
 model = train_LitModel(model, train_dataset, val_dataset, epochs=15, batch_size=8, patience = 3, num_gpu=1)
     
  
-preds, ground_truths = model_testing(model, val_dataset)
+preds, ground_truths = model_testing(model, test_dataset)
 
 cr = classification_report(y_true=ground_truths, y_pred = preds, output_dict = False)
 
