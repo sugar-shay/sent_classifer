@@ -47,6 +47,9 @@ class Lit_SequenceClassification(pl.LightningModule):
     def save_model(self):
         torch.save(self.state_dict(), self.save_fp)
     
+    def load_model(self, fp):
+        self.load_state_dict(torch.load(fp))
+
     def forward(self, input_ids, attention_mask):
         
         outputs = self.encoder(input_ids=input_ids, attention_mask=attention_mask, return_dict=True)

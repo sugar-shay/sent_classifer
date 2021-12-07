@@ -58,7 +58,7 @@ val_dataset = tokenizer.encode_data(val_data)
 test_dataset = tokenizer.encode_data(reddit_test_data)
 
 
-model = Lit_SequenceClassification(model_checkpoint)
+model = Lit_SequenceClassification(model_checkpoint, save_fp = 'reddit_sentiment_classifier.pt')
 
 preds, ground_truths = model_testing(model, test_dataset)
 
@@ -78,6 +78,18 @@ cr = classification_report(y_true=ground_truths, y_pred = preds, output_dict = F
 print()
 print('Reddit Data Finetune Report: ')
 print(cr)
+
+model = Lit_SequenceClassification(model_checkpoint, save_fp = 'reddit_sentiment_classifier.pt')
+model.load_model('reddit_sentiment_classifier.pt')
+
+preds, ground_truths = model_testing(model, test_dataset)
+
+cr = classification_report(y_true=ground_truths, y_pred = preds, output_dict = False)
+
+print()
+print('Reddit Data Finetune Report w/ Save: ')
+print(cr)
+
 
 
    
