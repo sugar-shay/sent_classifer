@@ -31,9 +31,9 @@ top_posts = subreddit.top(limit=30)
 text = []
 for i,submission in enumerate(top_posts):
     
-    print()
-    print('Submission #: ', i)
-    print('Title: {}, ups: {}, downs: {}, upvote ratio: {}, score: {}'.format(submission.title, submission.ups, submission.downs, submission.upvote_ratio, submission.score))
+    #print()
+    #print('Submission #: ', i)
+    #print('Title: {}, ups: {}, downs: {}, upvote ratio: {}, score: {}'.format(submission.title, submission.ups, submission.downs, submission.upvote_ratio, submission.score))
     text.append(submission.title)
 
 tokenizer_checkpoint = "facebook/muppet-roberta-large"
@@ -60,7 +60,7 @@ test_dataset = tokenizer.encode_data(text)
 
 model = Lit_SequenceClassification('reddit_sentiment_classifier')
 
-sanity_check_preds, ground_truths = model_testing(model, test_dataset)
+sanity_check_preds, ground_truths = model_testing(model, sanity_check_dataset)
 
 cr = classification_report(y_true=ground_truths, y_pred = sanity_check_preds, output_dict = False)
 
