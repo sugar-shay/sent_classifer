@@ -77,7 +77,9 @@ class Lit_SequenceClassification(pl.LightningModule):
     def validation_step(self, batch, batch_idx):
 
         logits = self.forward(input_ids= batch['input_ids'], attention_mask=batch['attention_mask'])
-        loss = self.criterion(logits, batch['label'])
+        loss = torch.nn.functional.cross_entropy(logits, batch['label'])
+    
+        #loss = self.criterion(logits, batch['label'])
 
         return {'val_loss':loss}
   
@@ -138,3 +140,32 @@ def model_testing(model, test_dataset):
     
     
     return preds, ground_truths
+
+# =============================================================================
+# This is the evaluation function for the Learn-to-Rank model
+# ---returns NDCG@2 and NDCG@4
+# ---returns classification metrics using the softmax logits from the encoder
+# =============================================================================
+def model_prediction(model, test_dataset):
+    
+    device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
+    
+    model = model.to(device)
+    
+    test_dataloader = DataLoader(test_dataset, batch_size=32)
+    
+    preds = []
+    
+    model.eval()
+    for idx, batch in enumerate(test_dataloader):
+        
+        seq = (batch['input_ids']).to(device)
+        mask = (batch['attention_mask']).to(device)
+
+        
+        logits = model(input_ids=seq, attention_mask=mask)
+        logits = logits.detach().cpu().numpy()
+        preds.extend(np.argmax(logits, axis = -1))
+    
+    
+    return preds
