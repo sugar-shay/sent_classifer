@@ -79,7 +79,7 @@ id2tag = {0:'negative', 1:'neutral', 2:'positive'}
 print('Prediction Counter: ', prediction_counter)
 print('Majority Vote: ', id2tag[majority_vote])
 
-for pred, title in zip(test_preds, text):
+for pred, title in zip(test_preds, text['sentence'].tolist()):
     print()
     print('Predicted Sentiment: ', pred)
     print('Original Text: ', title)
