@@ -16,10 +16,10 @@ class SentTokenizer():
         sentences = data['sentence']
         deployment = False
         
-        '''
+        
         if 'label' not in data.columns:
             deployment = True
-        '''
+        
         
         if self.reddit_eval == False:
             encodings = self.tokenizer(sentences, is_split_into_words=False, return_offsets_mapping=False, max_length = self.max_len, padding=True, truncation=True)
