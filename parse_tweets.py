@@ -17,7 +17,7 @@ test_data = pd.read_pickle('raw_tweet_data.pkl')
 print()
 print('len raw tweet data: ', len(test_data))
 
-text = test_data['text'].tolist()
+text = test_data['sentence'].tolist()
 
 tokenizer_checkpoint = "facebook/muppet-roberta-large"
 model_checkpoint = 'reddit_sentiment_classifier'
