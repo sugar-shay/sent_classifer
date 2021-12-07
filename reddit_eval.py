@@ -81,7 +81,7 @@ print(cr)
 
 model.save_model()
 model = Lit_SequenceClassification('reddit_sentiment_classifier')
-model.load_model('reddit_sentiment_classifier.pt')
+#model.load_model('reddit_sentiment_classifier.pt')
 
 preds, ground_truths = model_testing(model, test_dataset)
 
