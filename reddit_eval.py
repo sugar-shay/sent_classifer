@@ -79,7 +79,10 @@ print()
 print('Reddit Data Finetune Report: ')
 print(cr)
 
+#need to save the model again for reasons adressed here: https://github.com/huggingface/transformers/issues/8272
 model.save_model()
+
+'''
 model = Lit_SequenceClassification('reddit_sentiment_classifier')
 #model.load_model('reddit_sentiment_classifier.pt')
 
@@ -91,7 +94,7 @@ print()
 print('Reddit Data Finetune Report w/ Save: ')
 print(cr)
 
-
+'''
 
    
 '''
