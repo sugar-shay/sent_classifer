@@ -19,8 +19,8 @@ def main():
     
     #model_checkpoint = 'ProsusAI/finbert'
     #model_checkpoint = 'bert-base-uncased'
-    #model_checkpoint = "mrm8488/distilroberta-finetuned-financial-news-sentiment-analysis"
-    model_checkpoint = "facebook/muppet-roberta-base"
+    model_checkpoint = "mrm8488/distilroberta-finetuned-financial-news-sentiment-analysis"
+    #model_checkpoint = "facebook/muppet-roberta-base"
     finetune_dataset = 'financial_phrasebank'
     #model_checkpoint = "bert-base-uncased"
     
