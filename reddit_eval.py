@@ -79,7 +79,6 @@ print()
 print('Reddit Data Finetune Report: ')
 print(cr)
 
-model.save_model()
 model = Lit_SequenceClassification('reddit_sentiment_classifier')
 #model.load_model('reddit_sentiment_classifier.pt')
 

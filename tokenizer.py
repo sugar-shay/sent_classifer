@@ -14,19 +14,29 @@ class SentTokenizer():
     def encode_data(self, data):
         
         sentences = data['sentence']
+        deployment = False
+        if 'label' not in data.columns:
+            deployment = True
         
         if self.reddit_eval == False:
             encodings = self.tokenizer(sentences, is_split_into_words=False, return_offsets_mapping=False, max_length = self.max_len, padding=True, truncation=True)
-            dataset = Sentiment_Dataset(encodings, data['label'])
+            if deployment == False:
+                dataset = Sentiment_Dataset(encodings, data['label'])
+            else:
+                 dataset = Sentiment_Dataset(encodings)
+                 
         else:
             encodings = self.tokenizer(sentences.tolist(), is_split_into_words=False, return_offsets_mapping=False, max_length = self.max_len, padding=True, truncation=True)
-            dataset = Sentiment_Dataset(encodings, data['label'].tolist())
+            if deployment == False:
+                dataset = Sentiment_Dataset(encodings, data['label'].tolist())
+            else:
+                 dataset = Sentiment_Dataset(encodings)
             
         return dataset
     
 
 class Sentiment_Dataset(torch.utils.data.Dataset):
-    def __init__(self, encodings, ground_truths):
+    def __init__(self, encodings, ground_truths = None):
         self.encodings = encodings
         self.ground_truths = ground_truths
     

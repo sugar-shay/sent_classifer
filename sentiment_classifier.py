@@ -37,7 +37,7 @@ class Lit_SequenceClassification(pl.LightningModule):
         self.training_stats = {'train_losses':[],
                                'val_losses':[]}
         
-        self.save_fp = save_fp
+        #self.save_fp = save_fp
     
     def initialize_encoder(self, model_checkpoint):
         config = AutoConfig.from_pretrained(model_checkpoint, num_labels=3)
@@ -46,9 +46,11 @@ class Lit_SequenceClassification(pl.LightningModule):
     def save_model(self):
         #torch.save(self.state_dict(), self.save_fp)
         self.encoder.save_pretrained(self.save_fp)
-        
+    
+    '''
     def load_model(self, fp):
         self.load_state_dict(torch.load(fp))
+    '''
 
     def forward(self, input_ids, attention_mask):
         
