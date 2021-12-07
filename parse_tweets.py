@@ -14,6 +14,9 @@ from sklearn.metrics import classification_report
 from collections import Counter
 
 test_data = pd.read_pickle('raw_tweet_data.pkl')
+print()
+print('len raw tweet data: ', len(test_data))
+
 text = test_data['text'].tolist()
 
 tokenizer_checkpoint = "facebook/muppet-roberta-large"
@@ -51,3 +54,5 @@ print(cr)
 test_preds = model_prediction(model, test_dataset)
 
 processed_twitter_data = pd.DataFrame(data = {'sentiment': test_preds, 'date': test_data['date'].tolist()})
+print()
+print('len processed tweet data: ', len(processed_twitter_data))
