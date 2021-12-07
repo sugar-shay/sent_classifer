@@ -35,7 +35,7 @@ sanity_check_data['sentence'] = sanity_check_data['sentence'].astype(str)
 sanity_check_data['label'] =  sanity_check_data['label'].astype(int)
 
 
-max_length = 192
+max_length = 96
 tokenizer = SentTokenizer(tokenizer_checkpoint, max_length, reddit_eval=True)
 
 sanity_check_dataset = tokenizer.encode_data(sanity_check_data)
