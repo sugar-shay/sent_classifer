@@ -76,5 +76,6 @@ majority_vote = prediction_counter.most_common(1)[0][0]
 
 id2tag = {0:'negative', 1:'neutral', 2:'positive'}
 
+print('Prediction Counter: ', prediction_counter)
 print('Majority Vote: ', id2tag[majority_vote])
 
