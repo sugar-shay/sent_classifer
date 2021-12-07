@@ -20,8 +20,9 @@ def main():
     #model_checkpoint = 'ProsusAI/finbert'
     #model_checkpoint = 'bert-base-uncased'
     #model_checkpoint = "mrm8488/distilroberta-finetuned-financial-news-sentiment-analysis"
-    model_checkpoint = "facebook/muppet-roberta-large"
+    #model_checkpoint = "facebook/muppet-roberta-large"
     finetune_dataset = 'financial_phrasebank'
+    model_checkpoint = "bert-base-uncased"
     
     #label 2 correspnds to positive sentiment 
     #label 1 is neutral 
@@ -55,7 +56,7 @@ def main():
     
     
     model = train_LitModel(model, train_dataset, val_dataset, epochs=15, batch_size=8, patience = 3, num_gpu=1)
-    
+    model.save()
     '''
     #saving the training stats
     with open('train_stats.pkl', 'wb') as f:
@@ -66,6 +67,8 @@ def main():
     
     model.load_state_dict(torch.load('best_model.pt'))
     '''
+    
+    model = Lit_SequenceClassification('best_model')
     preds, ground_truths = model_testing(model, test_dataset)
     
     cr = classification_report(y_true=ground_truths, y_pred = preds, output_dict = False)
