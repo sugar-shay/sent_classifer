@@ -20,8 +20,8 @@ from sentiment_classifier import *
 
 #model_checkpoint = 'ProsusAI/finbert'
 #model_checkpoint = 'bert-base-uncased'
-model_checkpoint = "mrm8488/distilroberta-finetuned-financial-news-sentiment-analysis"
-#model_checkpoint = "facebook/muppet-roberta-large"
+#model_checkpoint = "mrm8488/distilroberta-finetuned-financial-news-sentiment-analysis"
+model_checkpoint = "facebook/muppet-roberta-large"
 training_dataset = 'Reddit_Data.csv'
 testing_dataset = 'Reddit_Data_Test.csv'
 
