@@ -37,7 +37,7 @@ class Lit_SequenceClassification(pl.LightningModule):
         self.training_stats = {'train_losses':[],
                                'val_losses':[]}
         
-        #self.save_fp = save_fp
+        self.save_fp = save_fp
     
     def initialize_encoder(self, model_checkpoint):
         config = AutoConfig.from_pretrained(model_checkpoint, num_labels=3)
