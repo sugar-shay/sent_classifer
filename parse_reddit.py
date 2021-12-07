@@ -66,7 +66,7 @@ cr = classification_report(y_true=ground_truths, y_pred = sanity_check_preds, ou
 
 print()
 print('Sanity Check on Reddit Test Data: ')
-print()
+print(cr)
 
 test_preds = model_prediction(model, test_dataset)
 
