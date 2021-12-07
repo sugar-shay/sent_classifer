@@ -12,6 +12,7 @@ from sentiment_classifier import *
 from tokenizer import *
 
 from sklearn.metrics import classification_report
+from collections import Counter
 
 reddit = praw.Reddit(client_id = "gM2kmUwONgKK1Hw77Jentw", #peronal use script
                     client_secret = "4WQSyS6-07wzeEbNv5oy7AO_7KZIOw", #secret token
@@ -69,4 +70,11 @@ print('Sanity Check on Reddit Test Data: ')
 print(cr)
 
 test_preds = model_prediction(model, test_dataset)
+
+prediction_counter = Counter(test_preds)
+majority_vote = prediction_counter.most_common(1)[0][0]
+
+id2tag = {0:'negative', 1:'neutral', 2:'positive'}
+
+print('Majority Vote: ', id2tag[majority_vote])
 
