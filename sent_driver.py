@@ -20,9 +20,9 @@ def main():
     #model_checkpoint = 'ProsusAI/finbert'
     #model_checkpoint = 'bert-base-uncased'
     #model_checkpoint = "mrm8488/distilroberta-finetuned-financial-news-sentiment-analysis"
-    #model_checkpoint = "facebook/muppet-roberta-large"
+    model_checkpoint = "facebook/muppet-roberta-base"
     finetune_dataset = 'financial_phrasebank'
-    model_checkpoint = "bert-base-uncased"
+    #model_checkpoint = "bert-base-uncased"
     
     #label 2 correspnds to positive sentiment 
     #label 1 is neutral 
