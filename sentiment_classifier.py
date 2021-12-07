@@ -28,9 +28,9 @@ from transformers import AutoConfig, AutoModelForSequenceClassification
 # =============================================================================
 class Lit_SequenceClassification(pl.LightningModule):
     
-    def __init__(self, encoder_name, save_fp = 'best_model.pt'):
+    def __init__(self, model_checkpoint, save_fp = 'best_model'):
         super(Lit_SequenceClassification, self).__init__()
-        self.initialize_encoder(encoder_name)
+        self.initialize_encoder(model_checkpoint)
         self.softmax = nn.Softmax(dim=-1)
         self.criterion = nn.CrossEntropyLoss()
         
@@ -40,13 +40,13 @@ class Lit_SequenceClassification(pl.LightningModule):
         self.save_fp = save_fp
     
     def initialize_encoder(self, model_checkpoint):
-        
         config = AutoConfig.from_pretrained(model_checkpoint, num_labels=3)
         self.encoder = AutoModelForSequenceClassification.from_pretrained(model_checkpoint, config=config)
         
     def save_model(self):
-        torch.save(self.state_dict(), self.save_fp)
-    
+        #torch.save(self.state_dict(), self.save_fp)
+        self.encoder.save_pretrained(self.save_fp)
+        
     def load_model(self, fp):
         self.load_state_dict(torch.load(fp))
 
