@@ -56,7 +56,7 @@ def main():
     
     
     model = train_LitModel(model, train_dataset, val_dataset, epochs=15, batch_size=8, patience = 3, num_gpu=1)
-    model.save()
+    model.save_model()
     '''
     #saving the training stats
     with open('train_stats.pkl', 'wb') as f:
